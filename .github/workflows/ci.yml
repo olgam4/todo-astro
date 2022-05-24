@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+    branches:
+    - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v3
+    - name: install pnpm
+      run: npm install --global pnpm
+    - name: pnpm install
+      run: pnpm install
+    - name: Make envfile
+      uses: SpicyPizza/create-envfile@v1.3
+      with:
+        envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    - name: build
+      run: pnpm build
+    - name: Deploy to Netlify
+      uses: nwtgck/actions-netlify@v1.2
+      with:
+        publish-dir: './dist'
+      env:
+        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
+        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
