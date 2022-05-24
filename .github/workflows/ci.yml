@@ -19,6 +19,8 @@ jobs:
       uses: SpicyPizza/create-envfile@v1.3
       with:
         envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+    - name: tess
+      run: ls -la && cat .env
     - name: build
       run: pnpm build
     - name: Deploy to Netlify
