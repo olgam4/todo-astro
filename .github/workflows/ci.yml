@@ -9,21 +9,19 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-    - name: Checkout
+    - name: 🛎 Checkout
       uses: actions/checkout@v3
-    - name: Make envfile
+    - name: 🎮 Make envfile
       uses: SpicyPizza/create-envfile@v1.3
       with:
         envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
-    - name: install pnpm
+    - name: 🔮 Add pnpm
       run: npm install --global pnpm
-    - name: pnpm install
+    - name: ⚡️ Install
       run: pnpm install
-    - name: tess
-      run: ls -la && cat .env
-    - name: build
+    - name: 🛠 Build
       run: pnpm build
-    - name: Deploy to Netlify
+    - name: 🚀 Netlify
       uses: nwtgck/actions-netlify@v1.2
       with:
         publish-dir: './dist'
