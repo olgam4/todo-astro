@@ -1,9 +1,12 @@
 ---
 import Layout from '@layouts/Layout.astro';
 import Card from '@components/Card/index.tsx';
+import { DBClient } from '@lib/db.ts';
+
+const todos = await DBClient.getTodos();
 ---
 <Layout title="TODO">
 	<main class="full flex justify-center items-center">
-    <Card />
+    {todos.map(t => <Card client:load status={t.status} content={t.content}/>)}
 	</main>
 </Layout>

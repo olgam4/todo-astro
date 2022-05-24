@@ -3,10 +3,12 @@ lockfileVersion: 5.4
 specifiers:
   '@astrojs/solid-js': 0.1.2
   '@babel/core': 7.18.0
+  '@prisma/client': 3.14.0
   astro: 1.0.0-beta.31
   postcss: 8.4.14
   postcss-nesting: 10.1.7
   postcss-preset-env: ^7.6.0
+  prisma: 3.14.0
   solid-js: 1.4.2
   tailwindcss: 3.0.24
   typescript: 4.6.4
@@ -14,10 +16,12 @@ specifiers:
 devDependencies:
   '@astrojs/solid-js': 0.1.2_4jxcsz7dhuvfvevakhhfcsrs5i
   '@babel/core': 7.18.0
+  '@prisma/client': 3.14.0_prisma@3.14.0
   astro: 1.0.0-beta.31
   postcss: 8.4.14
   postcss-nesting: 10.1.7_postcss@8.4.14
   postcss-preset-env: 7.6.0_postcss@8.4.14
+  prisma: 3.14.0
   solid-js: 1.4.2
   tailwindcss: 3.0.24
   typescript: 4.6.4
@@ -545,6 +549,29 @@ packages:
 
   /@polka/url/1.0.0-next.21:
     resolution: {integrity: sha512-a5Sab1C4/icpTZVzZc5Ghpz88yQtGOyNqYXcZgOssB2uuAr+wF/MvN6bgtW32q7HHrvBki+BsZ0OuNv6EV3K9g==}
+    dev: true
+
+  /@prisma/client/3.14.0_prisma@3.14.0:
+    resolution: {integrity: sha512-atb41UpgTR1MCst0VIbiHTMw8lmXnwUvE1KyUCAkq08+wJyjRE78Due+nSf+7uwqQn+fBFYVmoojtinhlLOSaA==}
+    engines: {node: '>=12.6'}
+    requiresBuild: true
+    peerDependencies:
+      prisma: '*'
+    peerDependenciesMeta:
+      prisma:
+        optional: true
+    dependencies:
+      '@prisma/engines-version': 3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a
+      prisma: 3.14.0
+    dev: true
+
+  /@prisma/engines-version/3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a:
+    resolution: {integrity: sha512-D+yHzq4a2r2Rrd0ZOW/mTZbgDIkUkD8ofKgusEI1xPiZz60Daks+UM7Me2ty5FzH3p/TgyhBpRrfIHx+ha20RQ==}
+    dev: true
+
+  /@prisma/engines/3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a:
+    resolution: {integrity: sha512-LwZvI3FY6f43xFjQNRuE10JM5R8vJzFTSmbV9X0Wuhv9kscLkjRlZt0BEoiHmO+2HA3B3xxbMfB5du7ZoSFXGg==}
+    requiresBuild: true
     dev: true
 
   /@proload/core/0.3.2:
@@ -3352,6 +3379,15 @@ packages:
       find-yarn-workspace-root2: 1.2.16
       path-exists: 4.0.0
       which-pm: 2.0.0
+    dev: true
+
+  /prisma/3.14.0:
+    resolution: {integrity: sha512-l9MOgNCn/paDE+i1K2fp9NZ+Du4trzPTJsGkaQHVBufTGqzoYHuNk8JfzXuIn0Gte6/ZjyKj652Jq/Lc1tp2yw==}
+    engines: {node: '>=12.6'}
+    hasBin: true
+    requiresBuild: true
+    dependencies:
+      '@prisma/engines': 3.14.0-36.2b0c12756921c891fec4f68d9444e18c7d5d4a6a
     dev: true
 
   /prismjs/1.28.0:
