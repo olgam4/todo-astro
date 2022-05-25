@@ -22,7 +22,7 @@ const fn = async (form: any) => {
     body: JSON.stringify({ token, content }),
   })
   if (!response.ok) {
-    notify()
+    notify('You don\'t have the right token')
   }
 }
 
