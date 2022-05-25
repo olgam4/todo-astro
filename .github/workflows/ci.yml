@@ -20,11 +20,12 @@ jobs:
     - name: ⚡️ Install
       run: pnpm install
     - name: 🛠 Build
-      run: pnpm build
-    - name: 🚀 Netlify
-      uses: nwtgck/actions-netlify@v1.2
+      run: pnpm build      
+    - name: 🛸 Vercel
+      uses: amondnet/vercel-action@v20 #deploy
       with:
-        publish-dir: './dist'
-      env:
-        NETLIFY_AUTH_TOKEN: ${{ secrets.NETLIFY_AUTH_TOKEN }}
-        NETLIFY_SITE_ID: ${{ secrets.NETLIFY_SITE_ID }}
+        vercel-token: ${{ secrets.VERCEL_TOKEN }}
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        vercel-args: '--prod'
+        vercel-org-id: ${{ secrets.ORG_ID}}
+        vercel-project-id: ${{ secrets.PROJECT_ID}}

@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "public": false,
+  "github": {
+    "enabled": false
+  },
+  "build": {
+    "env": {
+      "ENABLE_VC_BUILD": "1"
+    }
+  }
+}

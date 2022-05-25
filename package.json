@@ -11,6 +11,7 @@
   "devDependencies": {
     "@astrojs/netlify": "0.4.0",
     "@astrojs/solid-js": "0.1.2",
+    "@astrojs/vercel": "0.2.2",
     "@babel/core": "7.18.0",
     "@prisma/client": "3.14.0",
     "astro": "1.0.0-beta.31",
