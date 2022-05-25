@@ -7,10 +7,14 @@ on:
 
 env:
   ENABLE_VC_BUILD: 1
+  directory: front
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    defaults:
+      run: 
+        working-directory: ${{env.directory}}
     steps:
     - name: 🛎 Checkout
       uses: actions/checkout@v3
@@ -18,6 +22,7 @@ jobs:
       uses: SpicyPizza/create-envfile@v1.3
       with:
         envkey_DATABASE_URL: ${{ secrets.DATABASE_URL }}
+        directory: ${{env.directory}}
     - name: 🔮 Add pnpm
       run: npm install --global pnpm
     - name: ⚡️ Install
@@ -25,9 +30,10 @@ jobs:
     - name: 🛠 Build
       run: pnpm build      
     - name: 🛸 Vercel
-      uses: amondnet/vercel-action@v20 #deploy
+      uses: amondnet/vercel-action@v20
       with:
         vercel-token: ${{ secrets.VERCEL_TOKEN }}
         vercel-args: '--prod'
         vercel-org-id: ${{ secrets.VERCEL_ORG_ID}}
         vercel-project-id: ${{ secrets.VERCEL_PROJECT_ID}}
+        working-directory: ${{env.directory}}

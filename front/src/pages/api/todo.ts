@@ -17,7 +17,7 @@ export async function post({ request }) {
   return new Response(
     'ok',
     {
-      status: 200,
+      status: 201,
     }
   )
 }
