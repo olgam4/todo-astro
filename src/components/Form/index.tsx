@@ -1,3 +1,4 @@
+import { AddIcon } from '@components/Icons';
 import { notify } from '@lib/notification';
 import { createTodo } from './reactivity';
 
@@ -28,9 +29,15 @@ const fn = async (form: any) => {
 export default function () {
   const [value, setValue] = createTodo()
   return (
-    <div>
-      <form use:submit={fn}>
+    <form
+      use:submit={fn}
+        class="relative p-10"
+    >
+      <div
+        class="flex flex-col space-y-1 w-[400px]"
+      >
         <input
+          class="border rounded-sm p-1"
           onInput={(e: any) => {
             setValue(e.currentTarget.value)
           }}
@@ -40,14 +47,22 @@ export default function () {
           placeholder="TODO"
           />
         <input
+          class="border rounded-sm p-1"
           id="token"
           name="token"
           placeholder="Token"
           />
-        <button type="submit">
-          ok
+      </div>
+      <div
+        class="absolute top-[55px] -right-3"
+      >
+        <button
+          type="submit"
+          class="h-10 w-10 transition-all rounded-full flex justify-center items-center bg-blue-200 hover:bg-blue-700"
+        >
+          <AddIcon />
         </button>
-      </form>
-    </div>
+      </div>
+    </form>
   )
 }

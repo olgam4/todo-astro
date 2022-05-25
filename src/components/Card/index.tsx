@@ -8,9 +8,9 @@ export default function Card({
   content,
 }: Props) {
   return (
-    <div class="px-3 py-1 border rounded-md">
-      <p>{content}</p>
+    <div class="min-w-[400px] items-center space-x-2 flex px-3 py-1 border rounded-md">
       <input type="checkbox"/>
+      <p>{content}</p>
     </div>
   )
 }

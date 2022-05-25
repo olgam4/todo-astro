@@ -10,7 +10,7 @@ import { saveTodo } from '@pages/api/todo.ts';
 const todos = await DBClient.getTodos();
 ---
 <Layout title="TODO">
-	<main class="full flex justify-center items-center">
+	<main class="full flex space-y-3 flex-col justify-center items-center">
     {todos.map(t => <Card status={t.status} content={t.content}/>)}
     <Form client:load />
 	</main>
