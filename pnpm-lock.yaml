@@ -12,8 +12,10 @@ specifiers:
   postcss-preset-env: ^7.6.0
   prisma: 3.14.0
   solid-js: 1.4.2
+  solid-zustand: 1.4.0
   tailwindcss: 3.0.24
   typescript: 4.6.4
+  zustand: 4.0.0-rc.1
 
 devDependencies:
   '@astrojs/netlify': 0.4.0
@@ -27,8 +29,10 @@ devDependencies:
   postcss-preset-env: 7.6.0_postcss@8.4.14
   prisma: 3.14.0
   solid-js: 1.4.2
+  solid-zustand: 1.4.0_ms3upggf3zvo72mn6rzbhwmj7q
   tailwindcss: 3.0.24
   typescript: 4.6.4
+  zustand: 4.0.0-rc.1
 
 packages:
 
@@ -4236,6 +4240,16 @@ packages:
     resolution: {integrity: sha512-IU5yKuT8P/n5F5g8j1rTXqxUdPYmoZDk/074TG94AEYf/nyXAeG82BSge4/lLIbCfUcnGUJ6DRdebIjujOAYyg==}
     dev: true
 
+  /solid-zustand/1.4.0_ms3upggf3zvo72mn6rzbhwmj7q:
+    resolution: {integrity: sha512-4rTDfluuRS1JeO0uqCK12Ad7cOThzWumIrJrpQy4obz72NiozqwQ9WpKZV4bTpcSkdX6oDeTozK2BotYWonG5g==}
+    peerDependencies:
+      solid-js: '>=1.4.0'
+      zustand: ^4.0.0-rc.0
+    dependencies:
+      solid-js: 1.4.2
+      zustand: 4.0.0-rc.1
+    dev: true
+
   /source-map-js/1.0.2:
     resolution: {integrity: sha512-R0XvVJ9WusLiqTCEiGCmICCMplcCkIwwR11mOSD9CR5u+IXYdiseeEuXCVAjS54zqwkLcPNnmU4OeJ6tUrWhDw==}
     engines: {node: '>=0.10.0'}
@@ -4652,6 +4666,12 @@ packages:
       unist-util-visit-parents: 5.1.0
     dev: true
 
+  /use-sync-external-store/1.1.0:
+    resolution: {integrity: sha512-SEnieB2FPKEVne66NpXPd1Np4R1lTNKfjuy3XdIoPQKYBAFdzbzSZlSn1KJZUiihQLQC5Znot4SBz1EOTBwQAQ==}
+    peerDependencies:
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dev: true
+
   /util-deprecate/1.0.2:
     resolution: {integrity: sha1-RQ1Nyfpw3nMnYvvS1KKJgUGaDM8=}
     dev: true
@@ -4926,6 +4946,21 @@ packages:
 
   /zod/3.17.3:
     resolution: {integrity: sha512-4oKP5zvG6GGbMlqBkI5FESOAweldEhSOZ6LI6cG+JzUT7ofj1ZOC0PJudpQOpT1iqOFpYYtX5Pw0+o403y4bcg==}
+    dev: true
+
+  /zustand/4.0.0-rc.1:
+    resolution: {integrity: sha512-qgcs7zLqBdHu0PuT3GW4WCIY5SgXdsv30GQMu9Qpp1BA2aS+sNS8l4x0hWuyEhjXkN+701aGWawhKDv6oWJAcw==}
+    engines: {node: '>=12.7.0'}
+    peerDependencies:
+      immer: '>=9.0'
+      react: '>=16.8'
+    peerDependenciesMeta:
+      immer:
+        optional: true
+      react:
+        optional: true
+    dependencies:
+      use-sync-external-store: 1.1.0
     dev: true
 
   /zwitch/2.0.2:
