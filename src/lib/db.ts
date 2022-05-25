@@ -6,6 +6,14 @@ const getTodos = async () => {
   return await prisma.todo.findMany();
 }
 
+const deleteTodo = async (id: number) => {
+  return await prisma.todo.delete({
+    where: {
+      id
+    }
+  })
+}
+
 const saveTodo = async (todo: any) => {
   return await prisma.todo.create({
     data: {
@@ -17,6 +25,7 @@ const saveTodo = async (todo: any) => {
 const DBClient = {
   getTodos,
   saveTodo,
+  deleteTodo
 }
 
 export {

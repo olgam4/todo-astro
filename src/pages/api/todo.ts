@@ -6,6 +6,7 @@ const Error = new Response(
     status: 403
   }
 )
+
 export async function post({ request }) {
   const { content, token } = await request.json()
 
@@ -20,3 +21,4 @@ export async function post({ request }) {
     }
   )
 }
+
