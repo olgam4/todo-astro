@@ -7,6 +7,16 @@ const Error = new Response(
   }
 )
 
+export async function get() {
+  const todos = await DBClient.getTodos()
+  return new Response(
+    JSON.stringify(todos),
+    {
+      status: 201,
+    }
+  )
+}
+
 export async function post({ request }) {
   const { content, token } = await request.json()
 

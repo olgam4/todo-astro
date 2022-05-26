@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { update } from './update';
 
 const prisma = new PrismaClient();
 
@@ -7,19 +8,23 @@ const getTodos = async () => {
 }
 
 const deleteTodo = async (id: number) => {
-  return await prisma.todo.delete({
+  const data = await prisma.todo.delete({
     where: {
       id
     }
   })
+  update()
+  return data
 }
 
 const saveTodo = async (todo: any) => {
-  return await prisma.todo.create({
+  const data = await prisma.todo.create({
     data: {
       content: todo,
     }
   })
+  update()
+  return data
 }
 
 const DBClient = {

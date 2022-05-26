@@ -1,20 +1,13 @@
 ---
 import Layout from '@layouts/Layout.astro';
-import Card from '@components/Card/index.tsx';
 import Form from '@components/Form/index.tsx';
 import Toast from '@components/Toast/index.tsx';
 import TodoList from '@components/TodoList/index.tsx';
-import { createTodo } from '@components/Form/reactivity.ts';
-import { DBClient } from '@lib/db.ts';
-import { saveTodo } from '@pages/api/todo.ts';
-
-const todos = await DBClient.getTodos();
 ---
 <Layout title="TODO">
 	<main class="full flex flex-col justify-center items-center">
-    {todos.map(t => <Card status={t.status} id={t.id} content={t.content} client:load />)}
-    <Form client:idle />
     <TodoList client:load />
+    <Form client:idle />
 	</main>
   <Toast client:idle />
 </Layout>

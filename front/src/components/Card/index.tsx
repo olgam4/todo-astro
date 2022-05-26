@@ -3,10 +3,10 @@ import { DeleteIcon } from "@components/Icons"
 interface Props {
   status: boolean
   content: string
-  id: string
+  id: number
 }
 
-const deleteTodo = async (id: string) => {
+const deleteTodo = async (id: number) => {
   const response = await fetch('/api/todo-delete', {
     method: 'POST',
     headers: {

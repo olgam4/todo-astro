@@ -1,14 +1,18 @@
-import { createEffect } from "solid-js";
+import Card from '@components/Card'
+import { For } from "solid-js";
+import { Todo, useTodos } from './reactivity';
 
 export default function () {
-  createEffect( () => {
-    const events = new EventSource('http://localhost:8000/see');
-    events.onmessage = (event) => {
-      const parsedData = JSON.parse(event.data);
-      console.log(parsedData)
-    };
-  });
+  const { todos } = useTodos()
   return (
-    <div />
+    <For each={todos()}
+    children={(t: Todo) => (
+        <Card
+          status={t.status}
+          id={t.id}
+          content={t.content}
+          />
+      )}
+    />
   )
 }
