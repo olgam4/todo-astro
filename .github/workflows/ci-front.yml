@@ -5,7 +5,7 @@ on:
     branches:
     - main
     paths:
-    - 'front/*'
+    - 'front/**'
     - '.github/workflows/ci-front.yml'
 
 env:

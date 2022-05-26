@@ -5,7 +5,7 @@ on:
     branches:
     - main
     paths:
-    - 'back/*'
+    - 'back/**'
     - '.github/workflows/ci-back.yml'
 
 env:
