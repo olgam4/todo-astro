@@ -1,0 +1,35 @@
+name: ci-back
+
+on:
+  push:
+    branches:
+    - main
+    paths:
+    - 'back/*'
+    - '.github/workflows/ci-back.yml'
+
+env:
+  directory: back
+
+jobs:
+  deploy:
+    permissions:
+      id-token: write
+      contents: read
+    runs-on: ubuntu-latest
+    defaults:
+      run: 
+        working-directory: ${{env.directory}}
+    steps:
+    - name: 🛎 Checkout
+      uses: actions/checkout@v3
+    - uses: denoland/setup-deno@v1
+      with:
+        deno-version: vx.x.x
+    - name: Build
+      run: deno bundle index.ts build.js
+    - name: Deploy
+      uses: denoland/deployctl@v1
+      with:
+        project: olgam4-todo-astro
+        entrypoint: ${{env.directory}}/build.js
