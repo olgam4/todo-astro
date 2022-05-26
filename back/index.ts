@@ -9,12 +9,12 @@ const dataEvent = new ServerSentEvent('data', {})
 router.get('/sse', (ctx) => {
   const target = ctx.sendEvents();
   const event = new ServerSentEvent('ping', { 'hello': 'world' })
-  target.addEventListener('close', (e) => {
-    console.log('We lost connection');
-  })
   et.addEventListener('see', (evt) => {
     console.log('from the rout')
     target.dispatchEvent(dataEvent);
+  })
+  target.addEventListener('close', (e) => {
+    console.log('We lost connection');
   })
   console.log(`Connected with new user`)
   target.dispatchEvent(event)
@@ -24,9 +24,10 @@ router.post('/reset', async () => {
   console.log('Reseting with client...')
 })
 
-router.post('/see', async () => {
+router.post('/see', (ctx) => {
   console.log('SEE ?')
   et.dispatchEvent(seeEvent)
+  ctx.response.status = 200
 })
 
 router.get('/', (ctx) => {

@@ -1,4 +1,5 @@
 import { DBClient } from '@lib/db'
+import { update } from '@lib/update'
 
 const Error = new Response(
   'nope',
@@ -23,6 +24,7 @@ export async function post({ request }) {
   if (`&TlbDN6&Bh%#7wC6I` !== token) return Error
 
   await DBClient.saveTodo(content)
+  await update()
 
   return new Response(
     'ok',
