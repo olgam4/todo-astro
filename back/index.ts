@@ -26,6 +26,7 @@ router.post('/reset', async () => {
 
 router.post('/see', (ctx) => {
   console.log('SEE ?')
+  console.log(ctx.request.url)
   et.dispatchEvent(seeEvent)
   ctx.response.status = 200
 })
