@@ -18,7 +18,6 @@ const useTodos = () => {
   createEffect( () => {
     const es = new EventSource('https://olgam4-todo-astro.deno.dev/sse');
     es.addEventListener('data', (evt) => {
-      console.log(evt)
       refetch()
     })
   });
