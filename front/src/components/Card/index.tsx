@@ -37,7 +37,7 @@ export default function Card({
   id,
 }: Props) {
   return (
-    <div class="mb-3 min-w-[400px] flex items-center px-3 py-1 border rounded-md">
+    <div class="mb-3 w-[30%] flex items-center px-3 py-1 border rounded-md">
       <div class="space-x-2 flex items-center">
         <input type="checkbox" checked={status} onChange={(e) => markTodo(id, !status)}/>
         <p>{content}</p>

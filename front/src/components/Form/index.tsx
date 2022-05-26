@@ -33,10 +33,10 @@ export default function () {
   return (
     <form
       use:submit={fn}
-        class="relative p-10"
+        class="relative w-[30%]"
     >
       <div
-        class="flex flex-col space-y-1 w-[400px]"
+        class="flex flex-col space-y-1"
       >
         <input
           class="border rounded-sm p-1"
@@ -56,7 +56,7 @@ export default function () {
           />
       </div>
       <div
-        class="absolute top-[55px] -right-3"
+        class="absolute top-[15px] -right-[50px]"
       >
         <button
           type="submit"
