@@ -27,10 +27,16 @@ router.get('/sse', (ctx) => {
 
 const dataEvent = new ServerSentEvent('data', { new: 'todo' })
 
+router.post('/reset', async () => {
+  clients = [];
+  console.log('Reseting with client...')
+})
+
 router.post('/see', async () => {
   console.log('SEE ? ')
   for (const client of clients) {
-    client.target.dispatchEvent(dataEvent)
+    console.log('Will dispatch to', client);
+    client.target.dispatchEvent(dataEvent);
   }
 })
 
