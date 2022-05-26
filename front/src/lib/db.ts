@@ -2,6 +2,17 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const markTodo = async (id: number, status: boolean) => {
+  return await prisma.todo.update({
+    where: {
+      id
+    },
+    data: {
+      status
+    }
+  });
+}
+
 const getTodos = async () => {
   return await prisma.todo.findMany();
 }
@@ -27,7 +38,8 @@ const saveTodo = async (todo: any) => {
 const DBClient = {
   getTodos,
   saveTodo,
-  deleteTodo
+  deleteTodo,
+  markTodo,
 }
 
 export {
