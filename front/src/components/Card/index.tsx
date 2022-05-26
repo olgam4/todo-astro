@@ -1,4 +1,5 @@
 import { DeleteIcon } from "@components/Icons"
+import { update } from "@lib/update"
 
 interface Props {
   status: boolean
@@ -15,6 +16,7 @@ const deleteTodo = async (id: number) => {
     },
     body: JSON.stringify({ id })
   })
+  await update();
 }
 
 export default function Card({

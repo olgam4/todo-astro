@@ -1,5 +1,6 @@
 import { AddIcon } from '@components/Icons';
 import { notify } from '@lib/notification';
+import { update } from '@lib/update';
 import { createTodo } from './reactivity';
 
 const submit = (ref, accessor) => {
@@ -21,6 +22,7 @@ const fn = async (form: any) => {
     },
     body: JSON.stringify({ token, content }),
   })
+  await update()
   if (!response.ok) {
     notify('You don\'t have the right token')
   }
