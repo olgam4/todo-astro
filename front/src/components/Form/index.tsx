@@ -33,10 +33,10 @@ export default function () {
   return (
     <form
       use:submit={fn}
-        class="relative w-[30%]"
+      class="relative w-full"
     >
       <div
-        class="flex flex-col space-y-1"
+        class="flex py-5 px-16 flex-col space-y-1"
       >
         <input
           class="border rounded-sm p-1"
@@ -54,13 +54,9 @@ export default function () {
           name="token"
           placeholder="Token"
           />
-      </div>
-      <div
-        class="absolute top-[15px] -right-[50px]"
-      >
         <button
           type="submit"
-          class="h-10 w-10 transition-all rounded-full flex justify-center items-center bg-blue-200 hover:bg-blue-700"
+          class="absolute right-3 top-8 h-10 w-10 transition-all rounded-full flex justify-center items-center bg-blue-200 hover:bg-blue-700 hover:text-white"
         >
           <AddIcon />
         </button>

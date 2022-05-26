@@ -4,15 +4,16 @@ import { Todo, useTodos } from './reactivity';
 
 export default function () {
   const { todos } = useTodos()
+
   return (
     <For each={todos()}
-    children={(t: Todo) => (
+      children={(t: Todo) => (
         <Card
           status={t.status}
           id={t.id}
           content={t.content}
           />
       )}
-    />
+      />
   )
 }

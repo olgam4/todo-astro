@@ -15,6 +15,7 @@
     "@babel/core": "7.18.0",
     "@prisma/client": "3.14.0",
     "astro": "1.0.0-beta.31",
+    "autoprefixer": "github:postcss/autoprefixer",
     "postcss": "8.4.14",
     "postcss-nesting": "10.1.7",
     "postcss-preset-env": "7.6.0",

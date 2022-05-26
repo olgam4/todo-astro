@@ -18,6 +18,7 @@ export default function () {
         });
         a.finished.then(done);
       }}
+      appear
     >
       <Show when={state.visible} children={0}>
         <div class="absolute rounded-md shadow-md p-5 bg-red-400 h-[65px] w-[300px] top-1 left-1">

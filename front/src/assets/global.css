@@ -1,9 +1,75 @@
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+* {
+  font-family: 'Quicksand', sans-serif;
+}
+
 @layer utilities {
   .full {
     @apply absolute top-0 left-0 right-0 bottom-0;
+  }
+
+  .center {
+    @apply flex items-center justify-center;
+  }
+
+  .appear {
+    animation-duration: 1s;
+    animation-name: slidein;
+    animation-iteration-count: 1;
+  }
+}
+
+
+@keyframes slidein {
+  from {
+    transform: translateX(10px);
+    opacity: 0;
+  }
+
+  to {
+    transform: translateX(0px);
+    opacity: 1;
+  }
+}
+
+@layer components {
+  input.todo-checkbox {
+    appearance: none;
+    background-color: #fff;
+    margin: 0;
+
+    @apply transition-colors bg-blue-300 w-full h-full;
+    display: grid;
+    place-content:center;
+    border-radius: inherit;
+
+    &:hover {
+      cursor: pointer;
+    }
+
+    &:checked {
+      @apply bg-blue-200;
+
+      &::before {
+        @apply shadow-blue-100;
+        box-shadow: inset 1em 1em #0000FF;
+      }
+    }
+
+    &::before {
+      content: "";
+      width: 0.65em;
+      height: 0.65em;
+      transition: 120ms transform ease-in-out;
+      clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
+      box-shadow: inset 1em 1em #DBEAFE;
+      transform: scale(1.5);
+      transition: all 0.5s;
+    }
   }
 }

@@ -7,6 +7,7 @@ specifiers:
   '@babel/core': 7.18.0
   '@prisma/client': 3.14.0
   astro: 1.0.0-beta.31
+  autoprefixer: github:postcss/autoprefixer
   postcss: 8.4.14
   postcss-nesting: 10.1.7
   postcss-preset-env: 7.6.0
@@ -25,6 +26,7 @@ devDependencies:
   '@babel/core': 7.18.0
   '@prisma/client': 3.14.0_prisma@3.14.0
   astro: 1.0.0-beta.31
+  autoprefixer: github.com/postcss/autoprefixer/616c44240a1478e54d8b7bc79ed8fa5db6392d11_postcss@8.4.14
   postcss: 8.4.14
   postcss-nesting: 10.1.7_postcss@8.4.14
   postcss-preset-env: 7.6.0_postcss@8.4.14
@@ -4975,4 +4977,23 @@ packages:
 
   /zwitch/2.0.2:
     resolution: {integrity: sha512-JZxotl7SxAJH0j7dN4pxsTV6ZLXoLdGME+PsjkL/DaBrVryK9kTGq06GfKrwcSOqypP+fdXGoCHE36b99fWVoA==}
+    dev: true
+
+  github.com/postcss/autoprefixer/616c44240a1478e54d8b7bc79ed8fa5db6392d11_postcss@8.4.14:
+    resolution: {tarball: https://codeload.github.com/postcss/autoprefixer/tar.gz/616c44240a1478e54d8b7bc79ed8fa5db6392d11}
+    id: github.com/postcss/autoprefixer/616c44240a1478e54d8b7bc79ed8fa5db6392d11
+    name: autoprefixer
+    version: 10.4.7
+    engines: {node: ^10 || ^12 || >=14}
+    hasBin: true
+    peerDependencies:
+      postcss: ^8.1.0
+    dependencies:
+      browserslist: 4.20.3
+      caniuse-lite: 1.0.30001342
+      fraction.js: 4.2.0
+      normalize-range: 0.1.2
+      picocolors: 1.0.0
+      postcss: 8.4.14
+      postcss-value-parser: 4.2.0
     dev: true
