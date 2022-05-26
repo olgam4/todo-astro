@@ -5,11 +5,11 @@ import Toast from '@components/Toast/index.tsx';
 import TodoList from '@components/TodoList/index.tsx';
 ---
 <Layout title="STA">
-  <main class="full flex-col">
+  <main class="full flex-col bg-slate-50">
     <div class="grid p-3 w-full lg:grid-cols-3 pb-[120px] sm:grid-cols-2 grid-cols-1 overflow-scroll">
       <TodoList client:load />
     </div>
-    <div class="center w-full fixed bottom-0 border-t bg-gray-100">
+    <div class="center w-full fixed bottom-0 border-t bg-slate-100">
       <Form client:idle />
     </div>
   </main>
