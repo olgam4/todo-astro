@@ -7,37 +7,25 @@ type Client = {
 }
 
 const router = new Router();
-let clients: Array<Client> = [];
 
 router.get('/sse', (ctx) => {
   const target = ctx.sendEvents();
   const event = new ServerSentEvent('ping', { 'hello': 'world' })
   target.addEventListener('close', (e) => {
     console.log('We lost connection');
-    clients = [];
   })
   console.log(`Connected with new user`)
   target.dispatchEvent(event)
-  const client = {
-    id: Date.now(),
-    target,
-  } as Client
-  clients.push(client)
 })
 
 const dataEvent = new ServerSentEvent('data', { new: 'todo' })
 
 router.post('/reset', async () => {
-  clients = [];
   console.log('Reseting with client...')
 })
 
 router.post('/see', async () => {
-  console.log('SEE ? ')
-  for (const client of clients) {
-    console.log('Will dispatch to', client);
-    client.target.dispatchEvent(dataEvent);
-  }
+  console.log('SEE ?')
 })
 
 router.get('/', (ctx) => {
