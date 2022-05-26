@@ -40,7 +40,7 @@ router.get('/', (ctx) => {
 
 const app = new Application();
 app.use(oakCors({
-  origin: /^.+localhost:(1234|3000)$/,
+  origin: [/^.+localhost:(1234|3000)$/, 'https://todo.glo.quebec']
 }));
 app.use(router.routes());
 console.log(`Listening on port 8000`);
