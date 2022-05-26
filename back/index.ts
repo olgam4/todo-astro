@@ -1,12 +1,10 @@
-import { Application, ServerSentEvent, ServerSentEventTarget, Router } from 'https://deno.land/x/oak/mod.ts';
+import { Application, ServerSentEvent, Router } from 'https://deno.land/x/oak/mod.ts';
 import { oakCors } from "https://deno.land/x/cors/mod.ts";
 
-type Client = {
-  id: number
-  target: ServerSentEventTarget
-}
-
 const router = new Router();
+const et = new EventTarget()
+const seeEvent = new CustomEvent('see')
+const dataEvent = new ServerSentEvent('data', {})
 
 router.get('/sse', (ctx) => {
   const target = ctx.sendEvents();
@@ -14,11 +12,13 @@ router.get('/sse', (ctx) => {
   target.addEventListener('close', (e) => {
     console.log('We lost connection');
   })
+  et.addEventListener('see', (evt) => {
+    console.log('from the rout')
+    target.dispatchEvent(dataEvent);
+  })
   console.log(`Connected with new user`)
   target.dispatchEvent(event)
 })
-
-const dataEvent = new ServerSentEvent('data', { new: 'todo' })
 
 router.post('/reset', async () => {
   console.log('Reseting with client...')
@@ -26,6 +26,7 @@ router.post('/reset', async () => {
 
 router.post('/see', async () => {
   console.log('SEE ?')
+  et.dispatchEvent(seeEvent)
 })
 
 router.get('/', (ctx) => {
