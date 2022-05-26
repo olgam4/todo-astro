@@ -13,7 +13,7 @@ const deleteTodo = async (id: number) => {
       id
     }
   })
-  update()
+  await update()
   return data
 }
 
@@ -23,7 +23,7 @@ const saveTodo = async (todo: any) => {
       content: todo,
     }
   })
-  update()
+  await update()
   return data
 }
 

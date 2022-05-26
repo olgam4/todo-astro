@@ -12,7 +12,7 @@ export async function get() {
   return new Response(
     JSON.stringify(todos),
     {
-      status: 201,
+      status: 200,
     }
   )
 }
