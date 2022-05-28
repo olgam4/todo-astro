@@ -22,19 +22,39 @@
     animation-name: slidein;
     animation-iteration-count: 1;
   }
+
+  .disappear {
+    animation-duration: 0.5s;
+    animation-name: fadeout;
+    animation-iteration-count: 1;
+  }
+
+  .display-none {
+    display: none;
+  }
 }
 
+@keyframes fadeout {
+from {
+  opacity: 1;
+}
+
+to {
+  opacity: 0;
+  display: none;
+}
+}
 
 @keyframes slidein {
-  from {
-    transform: translateX(10px);
-    opacity: 0;
-  }
+from {
+  transform: translateX(10px);
+  opacity: 0;
+}
 
-  to {
-    transform: translateX(0px);
-    opacity: 1;
-  }
+to {
+  transform: translateX(0px);
+  opacity: 1;
+}
 }
 
 @layer components {
@@ -42,13 +62,15 @@
     appearance: none;
     background-color: #fff;
     margin: 0;
+    transition: all 0.5s;
 
-    @apply transition-colors bg-blue-300 w-full h-full;
+    @apply bg-blue-300 w-full h-full;
     display: grid;
     place-content:center;
     border-radius: inherit;
 
     &:hover {
+      @apply bg-blue-200 shadow-2xl;
       cursor: pointer;
     }
 
@@ -67,7 +89,8 @@
       height: 0.65em;
       transition: 120ms transform ease-in-out;
       clip-path: polygon(14% 44%, 0 65%, 50% 100%, 100% 16%, 80% 0%, 43% 62%);
-      box-shadow: inset 1em 1em #DBEAFE;
+      box-shadow: inset 1em 1em rgba(255, 255, 255, 0.15);
+
       transform: scale(1.5);
       transition: all 0.5s;
     }

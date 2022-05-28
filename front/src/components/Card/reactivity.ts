@@ -1,8 +1,7 @@
-import create from 'solid-zustand';
+import create from 'solid-zustand'
 
-
-export const ise = create<any>(set => ({
-  add: (id, el) => set(state => {
+export const ise = create<any>((set: any) => ({
+  add: (id: string, el: boolean) => set((state: any) => {
     state[id] = el
     return state
   })

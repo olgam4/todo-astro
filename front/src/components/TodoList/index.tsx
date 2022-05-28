@@ -1,5 +1,5 @@
 import Card from '@components/Card'
-import { For } from "solid-js";
+import { createEffect, For, onMount } from "solid-js";
 import { Todo, useTodos } from './reactivity';
 
 export default function () {
