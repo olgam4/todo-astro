@@ -2,7 +2,6 @@ import { DeleteIcon } from "@components/Icons"
 import { onMount } from "solid-js"
 import { deleteTodo, markTodo } from "./api"
 import { ise } from "./reactivity"
-import party from 'party-js'
 
 interface Props {
   status: boolean
@@ -34,7 +33,9 @@ export default function Card({
   }
 
   const onChange = (id: number, status: boolean) => {
+    //@ts-ignore
     !status && party.confetti(buttonRef, {
+      //@ts-ignore
       count: party.variation.range(20, 40)
     })
     markTodo(id, !status)

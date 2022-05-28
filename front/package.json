@@ -8,9 +8,6 @@
     "build": "astro build",
     "preview": "astro preview"
   },
-  "dependencies": {
-    "party-js": "2.1.2"
-  },
   "devDependencies": {
     "@astrojs/netlify": "0.4.0",
     "@astrojs/solid-js": "0.1.2",
@@ -30,6 +27,5 @@
     "typescript": "4.6.4",
     "zustand": "4.0.0-rc.1"
   },
-  "strict-peer-dependencies": false,
-  "type": "commonjs"
+  "strict-peer-dependencies": false
 }
