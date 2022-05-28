@@ -2,14 +2,6 @@ import { AddIcon } from '@components/Icons';
 import { fn } from './api';
 import { createTodo } from './reactivity';
 
-const submit = (ref, accessor) => {
-  const callback = accessor() || (() => {});
-  ref.onsubmit = async (e) => {
-    e.preventDefault();
-    callback(ref)
-  }
-}
-
 export default function () {
   const [value, setValue] = createTodo()
   return (

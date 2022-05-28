@@ -4,7 +4,6 @@ import { deleteTodo, markTodo } from "./api"
 import { ise } from "./reactivity"
 import party from 'party-js'
 
-
 interface Props {
   status: boolean
   content: string
