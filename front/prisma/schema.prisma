@@ -1,30 +1,48 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
-  provider = "prisma-client-js"
+  provider        = "prisma-client-js"
   previewFeatures = ["referentialIntegrity"]
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider             = "mysql"
+  url                  = env("DATABASE_URL")
   referentialIntegrity = "prisma"
 }
 
 model Todo {
-  id           Int       @default(autoincrement()) @id
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  status       Boolean   @default(false)
-  content      String    @db.VarChar(255)
+  id               Int                @id @default(autoincrement())
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  status           Boolean            @default(false)
+  content          String             @db.VarChar(255)
+  categories       CategoriesOnTodo[]
 }
 
 model User {
-  id           Int       @default(autoincrement()) @id
-  createdAt    DateTime  @default(now())
-  updatedAt    DateTime  @updatedAt
-  name         String    @db.VarChar(255)
-  email        String    @db.VarChar(255)
-  password     String    @db.VarChar(255)
+  id               Int                @id @default(autoincrement())
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  name             String             @db.VarChar(255)
+  email            String             @db.VarChar(255)
+  password         String             @db.VarChar(255)
+}
+
+model Category {
+  id               Int                @id @default(autoincrement())
+  createdAt        DateTime           @default(now())
+  updatedAt        DateTime           @updatedAt
+  title            String             @db.VarChar(255)
+  color            String             @db.VarChar(255)
+  todos            CategoriesOnTodo[]
+}
+
+model CategoriesOnTodo {
+  todo             Todo               @relation(fields: [todoId], references: [id])
+  todoId           Int
+  category         Category           @relation(fields: [categoryId], references: [id])
+  categoryId       Int
+  assignedAt       DateTime           @default(now())
+  assignedBy       String
+
+  @@id([todoId, categoryId])
 }
