@@ -2,6 +2,26 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
+const getUser = async (name: string) => {
+  return await prisma.user.findMany({
+    where: {
+      name,
+    },
+  }).then(data => {
+      return data[0].password
+  }).catch(() => {
+    throw new Error('User not found')
+  })
+}
+
+const createUser = async (user: any) => {
+  return await prisma.user.create({
+    data: {
+      ...user,
+    },
+  });
+}
+
 const markTodo = async (id: number, status: boolean) => {
   return await prisma.todo.update({
     where: {
@@ -40,6 +60,8 @@ const DBClient = {
   saveTodo,
   deleteTodo,
   markTodo,
+  getUser,
+  createUser,
 }
 
 export {

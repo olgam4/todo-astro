@@ -10,9 +10,7 @@ const submit = (ref, accessor) => {
   }
 }
 
-
 export default function () {
-  const [value, setValue] = createTodo()
   return (
     <form
       use:submit={fn}
@@ -23,19 +21,9 @@ export default function () {
       >
         <input
           class="border rounded-sm p-1"
-          onInput={(e: any) => {
-            setValue(e.currentTarget.value)
-          }}
-          value={value()}
           name="content"
           id="content"
           placeholder="TODO"
-          />
-        <input
-          class="border rounded-sm p-1"
-          id="token"
-          name="token"
-          placeholder="Token"
           />
         <button
           type="submit"

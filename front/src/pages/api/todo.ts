@@ -1,12 +1,5 @@
 import { DBClient } from '@lib/db'
 
-const Error = new Response(
-  'nope',
-  {
-    status: 403
-  }
-)
-
 export async function get() {
   const todos = await DBClient.getTodos()
   return new Response(
@@ -18,9 +11,7 @@ export async function get() {
 }
 
 export async function post({ request }) {
-  const { content, token } = await request.json()
-
-  if (`&TlbDN6&Bh%#7wC6I` !== token) return Error
+  const { content } = await request.json()
 
   await DBClient.saveTodo(content)
 

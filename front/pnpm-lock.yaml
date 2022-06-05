@@ -8,6 +8,7 @@ specifiers:
   '@prisma/client': 3.14.0
   astro: 1.0.0-beta.31
   autoprefixer: 10.4.7
+  js-cookie: 3.0.1
   postcss: 8.4.14
   postcss-nesting: 10.1.7
   postcss-preset-env: 7.6.0
@@ -27,6 +28,7 @@ devDependencies:
   '@prisma/client': 3.14.0_prisma@3.14.0
   astro: 1.0.0-beta.31
   autoprefixer: 10.4.7_postcss@8.4.14
+  js-cookie: 3.0.1
   postcss: 8.4.14
   postcss-nesting: 10.1.7_postcss@8.4.14
   postcss-preset-env: 7.6.0_postcss@8.4.14
@@ -2458,6 +2460,11 @@ packages:
 
   /isexe/2.0.0:
     resolution: {integrity: sha1-6PvzdNxVb/iUehDcsFctYz8s+hA=}
+    dev: true
+
+  /js-cookie/3.0.1:
+    resolution: {integrity: sha512-+0rgsUXZu4ncpPxRL+lNEptWMOWl9etvPHc/koSRp6MPwpRYAhmk0dUG00J4bxVV3r9uUzfo24wW0knS07SKSw==}
+    engines: {node: '>=12'}
     dev: true
 
   /js-tokens/4.0.0:

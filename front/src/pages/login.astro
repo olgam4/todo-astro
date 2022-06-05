@@ -1,0 +1,11 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Login from '@components/Login/index.tsx';
+---
+<Layout title="Login">
+  <main
+    class="flex justify-center items-center full"
+  >
+    <Login client:load />
+  </main>
+</Layout>

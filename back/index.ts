@@ -1,37 +1,79 @@
-import { Application, ServerSentEvent, Router } from 'https://deno.land/x/oak/mod.ts';
-import { oakCors } from "https://deno.land/x/cors/mod.ts";
-
+import {
+  Router,
+  ServerSentEvent,
+  Application,
+  createHash,
+  oakCors,
+  createJwt,
+  verifyJwt,
+  getNumericDate,
+} from "./deps.ts";
 const router = new Router();
-const et = new EventTarget()
-const seeEvent = new CustomEvent('see')
-const dataEvent = new ServerSentEvent('data', {})
+const et = new EventTarget();
+const seeEvent = new CustomEvent('see');
+const dataEvent = new ServerSentEvent('data', {});
 
 router.get('/sse', (ctx) => {
   const target = ctx.sendEvents();
-  const event = new ServerSentEvent('ping', { 'hello': 'world' })
+  const event = new ServerSentEvent('ping', { 'hello': 'world' });
   et.addEventListener('see', (evt) => {
-    console.log('from the rout')
+    console.log('from the rout', evt);
     target.dispatchEvent(dataEvent);
   })
-  target.addEventListener('close', (e) => {
+  target.addEventListener('close', () => {
     console.log('We lost connection');
   })
-  console.log(`Connected with new user`)
-  target.dispatchEvent(event)
+  console.log(`Connected with new user`);
+  target.dispatchEvent(event);
 })
 
-router.post('/reset', async () => {
-  console.log('Reseting with client...')
+router.post('/hash', async (ctx) => {
+  console.log('Hashing');
+  const body = await ctx.request.body().value;
+  const hashed = createHash('sha256').update(body.key);
+  ctx.response.body = hashed.toString();
+  ctx.response.status = 200;
+})
+
+router.post('/verify', async (ctx) => {
+  const body = await ctx.request.body().value;
+  const hashed = createHash('sha256').update(body.key);
+  if (hashed.toString() === body.hash) {
+    ctx.response.body = `${await createJwtToken()}`;
+    ctx.response.status = 200;
+  } else {
+    ctx.response.body = 'FAIL';
+    ctx.response.status = 400;
+  }
+})
+
+function createJwtToken() {
+  const jwt = createJwt( { alg: 'HS512', type: 'JWT' }, { exp: getNumericDate(60 * 60) }, 'secret' );
+  return jwt;
+}
+
+router.post('/auth', async (ctx) => {
+  const body = await ctx.request.body().value;
+  await verifyJwt(body.token, 'secret' , 'HS512')
+  .then(() => {
+    ctx.response.body = 'OK';
+    ctx.response.status = 200;
+  })
+  .catch((err) => {
+    console.log(err);
+    ctx.response.body = 'FAIL';
+    ctx.response.status = 400;
+  })
 })
 
 router.post('/see', (ctx) => {
-  console.log('SEE ?')
-  et.dispatchEvent(seeEvent)
-  ctx.response.status = 200
+  console.log('SEE ?');
+  et.dispatchEvent(seeEvent);
+  ctx.response.status = 200;
 })
 
 router.get('/', (ctx) => {
-  ctx.response.body = 'HelloWorld'
+  ctx.response.body = 'HelloWorld';
 })
 
 const app = new Application();

@@ -19,3 +19,12 @@ model Todo {
   status       Boolean   @default(false)
   content      String    @db.VarChar(255)
 }
+
+model User {
+  id           Int       @default(autoincrement()) @id
+  createdAt    DateTime  @default(now())
+  updatedAt    DateTime  @updatedAt
+  name         String    @db.VarChar(255)
+  email        String    @db.VarChar(255)
+  password     String    @db.VarChar(255)
+}

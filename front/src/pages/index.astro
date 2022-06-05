@@ -1,8 +1,25 @@
 ---
+import Cookies from 'js-cookie';
 import Layout from '@layouts/Layout.astro';
 import Form from '@components/Form/index.tsx';
-import Toast from '@components/Toast/index.tsx';
+import Login from '@components/Login/index.tsx';
 import TodoList from '@components/TodoList/index.tsx';
+import { cookieRegex } from '@lib/regex.ts';
+import { auth } from '@lib/hash.ts';
+
+const cookies = Astro.request.headers.get('Cookie');
+
+const token = cookieRegex('tokentodov0').exec(cookies);
+
+if (token === null) {
+  return Astro.redirect('/login');
+}
+
+const response = await auth(token[2]);
+
+if (response.status >= 400) {
+  return Astro.redirect('/login');
+}
 ---
 <Layout title="STA">
   <main class="full flex-col bg-slate-50">
@@ -13,5 +30,4 @@ import TodoList from '@components/TodoList/index.tsx';
       <Form client:idle />
     </div>
   </main>
-  <Toast client:load />
 </Layout>
