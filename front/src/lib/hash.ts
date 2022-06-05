@@ -1,4 +1,5 @@
-const api = 'https://olgam4-todo-astro.deno.dev/sse'
+const api = 'https://olgam4-todo-astro.deno.dev'
+
 async function hash(value: string) {
   return await fetch(`${api}/hash`, {
     method: 'POST',
@@ -25,6 +26,7 @@ async function verify(value: string, hash: string) {
 }
 
 async function auth(token: string) {
+  console.log('auth', token)
   return await fetch(`${api}/auth`, {
     method: 'POST',
     headers: {
