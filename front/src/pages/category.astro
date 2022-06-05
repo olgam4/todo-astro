@@ -1,0 +1,15 @@
+---
+import Layout from '@layouts/Layout.astro';
+import LoggedIn from '@layouts/LoggedIn.astro';
+
+import CategoryList from '@components/CategoryList/index.tsx';
+---
+<Layout title="STA">
+  <main class="full flex flex-col bg-slate-50">
+    <LoggedIn client:load>
+      <div>
+        <CategoryList client:load />
+      </div>
+    </LoggedIn>
+  </main>
+</Layout>

@@ -1,0 +1,23 @@
+---
+import { cookieRegex } from '@lib/regex.ts';
+import { auth } from '@lib/hash.ts';
+import Menu from '@components/Menu/index.tsx';
+
+const cookies = Astro.request.headers.get('Cookie');
+
+const token = cookieRegex('tokentodov0').exec(cookies);
+
+if (token === null) {
+  return Astro.redirect('/login');
+}
+
+const response = await auth(token[2]);
+
+if (response.status >= 400) {
+  return Astro.redirect('/login');
+}
+---
+<>
+  <Menu client:load />
+  <slot />
+</>

@@ -1,6 +1,5 @@
 import { AddIcon } from '@components/Icons';
 import { fn } from './api';
-import { createTodo } from './reactivity';
 
 const submit = (ref, accessor) => {
   const callback = accessor() || (() => {});
@@ -27,7 +26,7 @@ export default function () {
           />
         <button
           type="submit"
-          class="shadow-xl shadow-black-900 absolute right-3 top-8 h-10 w-10 transition-all rounded-full flex justify-center items-center bg-blue-300 hover:bg-blue-700 hover:text-white"
+          class="shadow-xl shadow-black-900 absolute right-3 top-4 h-10 w-10 transition-all rounded-full flex justify-center items-center bg-blue-300 hover:bg-blue-700 hover:text-white"
         >
           <AddIcon />
         </button>

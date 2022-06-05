@@ -1,33 +1,20 @@
 ---
-import Cookies from 'js-cookie';
 import Layout from '@layouts/Layout.astro';
+import LoggedIn from '@layouts/LoggedIn.astro';
+
 import Form from '@components/Form/index.tsx';
 import Login from '@components/Login/index.tsx';
 import TodoList from '@components/TodoList/index.tsx';
-import { cookieRegex } from '@lib/regex.ts';
-import { auth } from '@lib/hash.ts';
-
-const cookies = Astro.request.headers.get('Cookie');
-
-const token = cookieRegex('tokentodov0').exec(cookies);
-
-if (token === null) {
-  return Astro.redirect('/login');
-}
-
-const response = await auth(token[2]);
-
-if (response.status >= 400) {
-  return Astro.redirect('/login');
-}
 ---
 <Layout title="STA">
-  <main class="full flex-col bg-slate-50">
-    <div class="grid p-3 w-full lg:grid-cols-3 pb-[120px] sm:grid-cols-2 grid-cols-1 overflow-scroll">
-      <TodoList client:load />
-    </div>
-    <div class="center w-full fixed bottom-0 border-t bg-slate-100">
-      <Form client:idle />
-    </div>
+  <main class="full flex flex-col bg-slate-50">
+    <LoggedIn client:load>
+      <div class="grid p-3 w-full lg:grid-cols-3 pb-[120px] sm:grid-cols-2 grid-cols-1 overflow-scroll">
+        <TodoList client:load />
+      </div>
+      <div class="center w-full fixed bottom-0 border-t bg-slate-100">
+        <Form client:idle />
+      </div>
+    </LoggedIn>
   </main>
 </Layout>

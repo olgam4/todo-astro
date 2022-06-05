@@ -26,7 +26,6 @@ async function verify(value: string, hash: string) {
 }
 
 async function auth(token: string) {
-  console.log('auth', token)
   return await fetch(`${api}/auth`, {
     method: 'POST',
     headers: {
