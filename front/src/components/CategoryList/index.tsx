@@ -1,14 +1,19 @@
 import { AddIcon } from '@components/Icons'
+import { update } from '@lib/update'
 import { createSignal, For, Show } from 'solid-js'
+import { useCategories } from './reactivity'
 
 interface CardProps {
   title: string
+  color: string
 }
 
-function Card({ title }: CardProps) {
+function Card({ title, color }: CardProps) {
+  console.log(color)
   return (
     <div
-      class="center p-4 h-28 w-28 bg-red-900 rounded-md"
+      class="center p-4 h-28 w-28 rounded-md"
+      style={{ background: color }}
     >
       <p>{title}</p>
     </div>
@@ -16,7 +21,7 @@ function Card({ title }: CardProps) {
 }
 
 interface AddProps {
-  add: (category: string) => void
+  add: (title: string, color: string) => void
 }
 
 function Add({ add }: AddProps) {
@@ -34,7 +39,7 @@ function Add({ add }: AddProps) {
             type="text"
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                add(newRef.value)
+                add(newRef.value, '#00ffff')
                 newRef.value = ''
                 setShow(false)
               }
@@ -60,15 +65,24 @@ function Add({ add }: AddProps) {
 }
 
 export default function() {
-  const [categories, setCategories] = createSignal([
-    'Uni',
-    'Work',
-    'Home',
-  ])
+  const { categories } = useCategories()
 
-  const addCategory = (category: string) => {
-    setCategories([...categories(), category])
+  const addCategory = async (title: string, color: string) => {
+    await fetch('/api/category', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json' 
+      },
+      body: JSON.stringify({
+        content: {
+          title,
+          color,
+        }
+      })
+    })
+    update()
   }
+
   return (
     <div>
       <div
@@ -78,7 +92,8 @@ export default function() {
           each={categories()}
           children={category => (
             <Card
-              title={category}
+              title={category.title}
+              color={category.color}
               />
           )}
           />

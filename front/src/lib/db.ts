@@ -55,6 +55,18 @@ const saveTodo = async (todo: any) => {
   return data
 }
 
+const createCategory = async (category: any) => {
+  const data = await prisma.category.create({
+    data: {
+      ...category,
+    }
+  })
+}
+
+const getCategories = async () => {
+  return await prisma.category.findMany();
+}
+
 const DBClient = {
   getTodos,
   saveTodo,
@@ -62,6 +74,8 @@ const DBClient = {
   markTodo,
   getUser,
   createUser,
+  createCategory,
+  getCategories,
 }
 
 export {

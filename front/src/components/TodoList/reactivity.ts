@@ -1,4 +1,5 @@
-import { createEffect, createResource } from 'solid-js';
+import { subscribe } from '@lib/update'
+import { createResource } from 'solid-js'
 
 export interface Todo {
   id: number
@@ -13,14 +14,9 @@ const useTodos = () => {
     })
     const data = await response.json()
     return data
-  });
+  })
 
-  createEffect( () => {
-    const es = new EventSource('https://olgam4-todo-astro.deno.dev/sse');
-    es.addEventListener('data', (evt) => {
-      refetch()
-    })
-  });
+  subscribe(refetch)
 
   return {
     todos
