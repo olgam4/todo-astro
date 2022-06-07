@@ -67,9 +67,10 @@ function Add({ add }: AddProps) {
 }
 
 export default function() {
-  const { categories } = useCategories()
+  const { categories, mutate } = useCategories()
 
   const addCategory = async (title: string, color: string) => {
+    mutate((prev) => [...prev, { title, color, id: 0 }])
     await fetch('/api/category', {
       method: 'POST',
       headers: {

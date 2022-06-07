@@ -8,7 +8,7 @@ export interface Category {
 }
 
 const useCategories = () => {
-  const [categories, { refetch }] = createResource<Array<Category>>(async () => {
+  const [categories, { mutate, refetch }] = createResource<Array<Category>>(async () => {
     const response = await fetch('/api/category', {
       method: 'GET',
     })
@@ -20,6 +20,7 @@ const useCategories = () => {
 
   return {
     categories,
+    mutate,
   }
 }
 
