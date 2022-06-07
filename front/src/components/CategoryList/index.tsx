@@ -9,7 +9,6 @@ interface CardProps {
 }
 
 function Card({ title, color }: CardProps) {
-  console.log(color)
   return (
     <div
       class="center p-4 h-28 w-28 rounded-md transition hover:scale-105 hover:shadow-xl cursor-pointer"

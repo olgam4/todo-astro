@@ -9,9 +9,7 @@ import TodoList from '@components/TodoList/index.tsx';
 <Layout title="STA">
   <main class="full flex flex-col bg-slate-50">
     <LoggedIn client:load>
-      <div class="grid p-3 w-full lg:grid-cols-3 pb-[120px] sm:grid-cols-2 grid-cols-1 overflow-scroll">
-        <TodoList client:load />
-      </div>
+      <TodoList client:load />
       <div class="center w-full fixed bottom-0 border-t bg-slate-100">
         <Form client:idle />
       </div>

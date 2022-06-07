@@ -1,9 +1,7 @@
 import { DBClient } from '@lib/db'
 
 export async function get() {
-  console.log('get category')
   const categories = await DBClient.getCategories()
-  console.log(categories)
   return new Response(
     JSON.stringify(categories),
     {
