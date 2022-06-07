@@ -51,12 +51,11 @@ const getTodos = async () => {
 }
 
 const deleteTodo = async (id: number) => {
-  const data = await prisma.todo.delete({
+  return await prisma.todo.delete({
     where: {
       id
     }
   })
-  return data
 }
 
 const saveTodo = async (content: any, categories: string[]) => {
