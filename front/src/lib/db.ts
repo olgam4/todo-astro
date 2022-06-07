@@ -34,7 +34,20 @@ const markTodo = async (id: number, status: boolean) => {
 }
 
 const getTodos = async () => {
-  return await prisma.todo.findMany();
+  // find all todos with their categories
+  const todos = await prisma.todo.findMany({
+    include: {
+      categories: {
+        include: {
+          category: true,
+        }
+      }
+    },
+  });
+  const result = todos.map((todo) => {
+    return { ...todo, categories: todo.categories.map((category) => category.category) }
+  })
+  return result;
 }
 
 const deleteTodo = async (id: number) => {

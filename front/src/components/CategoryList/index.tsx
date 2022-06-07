@@ -27,11 +27,13 @@ interface AddProps {
 function Add({ add }: AddProps) {
   let newRef
   const [show, setShow] = createSignal(false)
+  const [color, setColor] = createSignal('#fff')
   return (
     <>
       <Show when={show()} children={(
         <div
-          class="center p-4 h-28 w-28 bg-gray-200 rounded-md"
+          class="center p-4 h-28 w-28 rounded-md"
+          style={{ background: `#${color()}` }}
         >
           <input
             ref={newRef}
@@ -39,7 +41,7 @@ function Add({ add }: AddProps) {
             type="text"
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
-                add(newRef.value, '#00ffff')
+                add(newRef.value, `#${color()}`)
                 newRef.value = ''
                 setShow(false)
               }
@@ -56,6 +58,7 @@ function Add({ add }: AddProps) {
         onClick={() => {
           setShow(true)
           newRef.focus()
+          setColor(Math.floor(Math.random() * 0xffffff).toString(16))
         }}
       >
         <AddIcon />

@@ -12,6 +12,7 @@ export default function () {
           status={t.status}
           id={t.id}
           content={t.content}
+          color={t.categories[0] ? t.categories[0].color : '#fff'}
           />
       )}
       />

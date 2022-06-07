@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400,600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -64,22 +64,23 @@ to {
     margin: 0;
     transition: all 0.5s;
 
-    @apply bg-blue-300 w-full h-full;
+    @apply w-full h-full;
     display: grid;
+    opacity: 0.3;
     place-content:center;
     border-radius: inherit;
 
     &:hover {
-      @apply bg-blue-200 shadow-2xl;
+      @apply shadow-2xl;
       cursor: pointer;
+      opacity: 0.5;
     }
 
     &:checked {
       @apply bg-blue-200;
 
       &::before {
-        @apply shadow-blue-100;
-        box-shadow: inset 1em 1em #0000FF;
+        box-shadow: inset 1em 1em rgba(0, 0, 0, 1);
       }
     }
 
