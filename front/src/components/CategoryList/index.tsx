@@ -12,7 +12,7 @@ function Card({ title, color }: CardProps) {
   console.log(color)
   return (
     <div
-      class="center p-4 h-28 w-28 rounded-md"
+      class="center p-4 h-28 w-28 rounded-md transition hover:scale-105 hover:shadow-xl cursor-pointer"
       style={{ background: color }}
     >
       <p>{title}</p>
@@ -35,7 +35,7 @@ function Add({ add }: AddProps) {
         >
           <input
             ref={newRef}
-            class="bg-transparent w-full"
+            class="bg-transparent w-full text-center"
             type="text"
             onKeyPress={(e) => {
               if (e.key === 'Enter') {
@@ -52,7 +52,7 @@ function Add({ add }: AddProps) {
         </div>
       )} />
       <button
-        class="center p-4 h-28 w-28 bg-gray-200 rounded-md"
+        class="center p-4 h-28 w-28 bg-gray-200 rounded-md transition hover:bg-gray-300 hover:text-white"
         onClick={() => {
           setShow(true)
           newRef.focus()

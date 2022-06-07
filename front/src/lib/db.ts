@@ -47,7 +47,6 @@ const deleteTodo = async (id: number) => {
 }
 
 const saveTodo = async (content: any, categories: string[]) => {
-  // create categories if they don't exist
   const categoryIds = await Promise.all(categories.map(async (category: string) => {
     const categoryData = await prisma.category.findMany({
       where: {
