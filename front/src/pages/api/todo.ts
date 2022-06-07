@@ -11,9 +11,9 @@ export async function get() {
 }
 
 export async function post({ request }) {
-  const { content } = await request.json()
+  const { content, hashtags } = await request.json()
 
-  await DBClient.saveTodo(content)
+  await DBClient.saveTodo(content, hashtags)
 
   return new Response(
     'ok',

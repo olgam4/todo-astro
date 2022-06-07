@@ -3,7 +3,7 @@ function cookieRegex(name: string) {
 }
 
 function hashTagRegex() {
-  return /(#[a-zA-Z0-9_]+)/g
+  return /(^|\s)([#][a-z\d-]+)/gim
 }
 
 export {
