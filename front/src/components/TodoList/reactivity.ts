@@ -1,5 +1,5 @@
 import { subscribe } from '@lib/update'
-import { createResource } from 'solid-js'
+import { createMemo, createResource } from 'solid-js'
 
 export interface Todo {
   id: number
@@ -24,6 +24,21 @@ const useTodos = () => {
   }
 }
 
+const filterTodos = (search: () => string, checkedCategories: () => number[], todos: () => Todo[]) => {
+  return createMemo(() => {
+    const regex = new RegExp(search(), 'i')
+    const filteredTodosByRegex = todos()?.filter(todo => regex.test(todo.content))
+    if (checkedCategories().length > 0) {
+      return filteredTodosByRegex?.filter(todo => {
+        return checkedCategories().filter(c => todo.categories.map(c => c.id.toString()).includes(c)).length > 0
+      })
+    } else {
+      return filteredTodosByRegex
+    }
+  })
+}
+
 export {
+  filterTodos,
   useTodos,
 }

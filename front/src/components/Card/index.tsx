@@ -1,9 +1,9 @@
 import { DeleteIcon } from "@components/Icons"
 import { onMount } from "solid-js"
-import { deleteTodo, markTodo } from "./api"
-import { ise } from "./reactivity"
+import { deleteTodo } from "./api"
+import { disappear, ise, onChange } from "./reactivity"
 
-interface Props {
+interface CardProps {
   status: boolean
   content: string
   id: number
@@ -15,8 +15,9 @@ export default function Card({
   content,
   id,
   color,
-}: Props) {
+}: CardProps) {
   const state = ise()
+
   let ref: any
   let buttonRef: any
   const lid = `d-${id}`
@@ -26,22 +27,6 @@ export default function Card({
     state.add(lid, true)
   })
 
-  const disappear = () => {
-    ref.classList.add('disappear')
-    return new Promise<void>(resolve => setTimeout(() => {
-      ref.classList.add('display-none')
-      resolve()
-    }, 500));
-  }
-
-  const onChange = (id: number, status: boolean) => {
-    //@ts-ignore
-    !status && party.confetti(buttonRef, {
-      //@ts-ignore
-      count: party.variation.range(20, 40)
-    })
-    markTodo(id, !status)
-  }
 
   return (
     <div
@@ -62,7 +47,7 @@ export default function Card({
         <p class={`overflow-hidden flex items-center overflow-ellipsis w-full py-1 ${status && 'line-through'}`}>{content}</p>
       </div>
       <button
-        onClick={() => deleteTodo(id, disappear)}
+        onClick={() => deleteTodo(id, () => disappear(ref))}
         class="transition-colors ml-auto text-black/10 mr-2 hover:text-red-600"
       >
         <DeleteIcon />

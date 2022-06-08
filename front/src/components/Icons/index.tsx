@@ -29,3 +29,14 @@ export const LogoutIcon = () => {
     </svg>
   )
 }
+
+export const ArrowRightIcon = () => {
+return (
+    <> &gt; </>
+  )
+}
+export const ArrowLeftIcon = () => {
+return (
+    <> &lt; </>
+  )
+}
