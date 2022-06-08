@@ -109,6 +109,25 @@ const getCategories = async () => {
   return await prisma.category.findMany();
 }
 
+const deleteCategory = async (id: number) => {
+  return await prisma.category.delete({
+    where: {
+      id
+    }
+  })
+}
+
+const updateCategoryColor = async (id: number, color: string) => {
+  return await prisma.category.update({
+    where: {
+      id
+    },
+    data: {
+      color
+    }
+  })
+}
+
 const DBClient = {
   getTodos,
   saveTodo,
@@ -118,6 +137,8 @@ const DBClient = {
   createUser,
   createCategory,
   getCategories,
+  deleteCategory,
+  updateCategoryColor,
 }
 
 export {
