@@ -1,5 +1,6 @@
 import { AddIcon } from '@components/Icons';
 import { setCaretAtTheEndOFTheDocument } from '@lib/document';
+import { createSignal } from 'solid-js';
 import { fn } from './api';
 
 const submit = (ref, accessor) => {
@@ -14,21 +15,29 @@ export default function () {
   let ref: any
   let buttonRef: any
 
+  const [value, setValue] = createSignal('')
+
   return (
     <form
       use:submit={fn}
-      class="relative w-full"
+      class="w-full"
     >
       <div
-        class="flex py-5 px-16 flex-col space-y-1"
+        class="flex py-5 px-4"
       >
         <div
           ref={ref}
-          class="border rounded-sm p-1 bg-white"
+          as="input"
+          role="input"
+          class="border grow transition-all flex items-center rounded-sm p-4 bg-white"
           name="content"
           id="content"
           contenteditable="true"
           onKeyPress={(evt) => {
+            if (evt.key === 'Enter') {
+              evt.preventDefault();
+              buttonRef.click();
+            }
             const text = ref.innerText;
             const regex = /#[^\s]+/gim;
             const newText = text.replace(regex, (match: string) => {
@@ -36,16 +45,15 @@ export default function () {
             })
             ref.innerHTML = newText;
             setCaretAtTheEndOFTheDocument(ref);
-            if (evt.key === 'Enter') {
-              evt.preventDefault();
-              buttonRef.click();
-            }
+          }}
+          onInput={(evt) => {
+            setValue(evt.target.innerText)
           }}
           />
         <button
           ref={buttonRef}
           type="submit"
-          class="shadow-xl shadow-black-900 absolute right-3 top-4 h-10 w-10 transition-all rounded-full flex justify-center items-center bg-blue-300 hover:bg-blue-700 hover:text-white"
+          class={`transition-all rounded-md bg-blue-400 hover:bg-blue-300 hover:text-white ${value().length > 0 ? 'p-4 w-auto ml-2' : 'p-0 ml-0 opacity-0 w-0'}`}
         >
           <AddIcon />
         </button>
