@@ -27,7 +27,6 @@ export default function Card({
     state.add(lid, true)
   })
 
-
   return (
     <div
       id={`d-${id}`}
@@ -41,7 +40,7 @@ export default function Card({
             class="todo-checkbox"
             type="checkbox"
             checked={status}
-            onChange={() => onChange(id, status)}
+            onChange={() => onChange(buttonRef ,id, status)}
             />
         </div>
         <p class={`overflow-hidden flex items-center overflow-ellipsis w-full py-1 ${status && 'line-through'}`}>{content}</p>

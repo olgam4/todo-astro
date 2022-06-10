@@ -16,7 +16,8 @@ export const disappear = (ref) => {
   }, 500));
 }
 
-export const onChange = (id: number, status: boolean) => {
+export const onChange = (buttonRef: any, id: number, status: boolean) => {
+  console.log(id, status)
   //@ts-ignore
   !status && party.confetti(buttonRef, {
     //@ts-ignore

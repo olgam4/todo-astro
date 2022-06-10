@@ -1,6 +1,6 @@
 import { LogoutIcon } from '@components/Icons'
 import Cookies from 'js-cookie'
-import { createEffect, createMemo, createSignal } from 'solid-js'
+import { createEffect, createSignal } from 'solid-js'
 
 export default function() {
   const [location, setLocation] = createSignal('')
