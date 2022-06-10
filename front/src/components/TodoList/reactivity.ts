@@ -1,4 +1,5 @@
 import { subscribe } from '@lib/update'
+import { DateTime } from 'luxon'
 import { createMemo, createResource } from 'solid-js'
 
 export interface Todo {
@@ -6,21 +7,25 @@ export interface Todo {
   content: string
   status: boolean
   categories: any[]
+  dueDate: DateTime
 }
 
 const useTodos = () => {
-  const [todos, { refetch }] = createResource<Array<Todo>>(async () => {
+  const [todosResponse, { refetch }] = createResource<Array<Todo>>(async () => {
     const response = await fetch('/api/todo', {
       method: 'GET',
     })
     const data = await response.json()
-    return data
+    console.log(data)
+    return data.map(todo => ({
+      ...todo,
+      dueDate: DateTime.fromISO(todo.dueDate),
+    }))
   })
-
   subscribe(refetch)
 
   return {
-    todos
+    todos: todosResponse,
   }
 }
 

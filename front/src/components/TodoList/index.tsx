@@ -1,9 +1,9 @@
-import Card from '@components/Card'
-import { For } from "solid-js";
-import NoTodos from './NoTodos';
-import { filterTodos, Todo, useTodos } from './reactivity';
-import Search from './Search';
-import { useSearch } from './Search/reactivity';
+import Card from './Card'
+import { For } from "solid-js"
+import NoTodos from './NoTodos'
+import { filterTodos, Todo, useTodos } from './reactivity'
+import Search from './Search'
+import { useSearch } from './Search/reactivity'
 
 export default function () {
   const { todos } = useTodos()
@@ -33,6 +33,7 @@ export default function () {
               content={t.content}
               color={t.categories[0] ? t.categories[0].color : '#aaf'}
               category={t.categories[0]?.title}
+              dueDate={t.dueDate}
               />
           )}
           fallback={<NoTodos message={why}/>}

@@ -1,4 +1,4 @@
-import { DateTime } from '@lib/date'
+import { Date as DateTime } from '@lib/date'
 import { DBClient } from '@lib/db'
 
 
@@ -42,7 +42,6 @@ const mapStringToDatetime = (str: string) => {
     const delay = {}
     delay[unit] = parseInt(num, 10)
     return DateTime.now().set({ hour: 0, minute: 0, second: 0, millisecond: 0 }).plus(delay)
-
   }
   return 'oops'
 }

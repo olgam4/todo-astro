@@ -1,5 +1,6 @@
 import { DeleteIcon } from "@components/Icons"
 import { registerAnimation } from "@lib/animation"
+import { DateTime } from "luxon"
 import { onMount } from "solid-js"
 import { deleteTodo } from "./api"
 import { disappear, onChange } from "./reactivity"
@@ -10,6 +11,7 @@ interface CardProps {
   id: number
   category: string
   color?: string
+  dueDate?: DateTime
 }
 
 export default function Card({
@@ -18,6 +20,7 @@ export default function Card({
   id,
   color,
   category,
+  dueDate,
 }: CardProps) {
   let ref: any
   let buttonRef: any
@@ -25,6 +28,7 @@ export default function Card({
   const lid = `d-${id}`
 
   onMount(() => registerAnimation(lid, ref, 'appear'))
+  console.log(dueDate)
 
   return (
     <div
@@ -48,6 +52,7 @@ export default function Card({
         </p>}
         <p class={`overflow-hidden flex items-center overflow-ellipsis w-full py-1 ${status && 'line-through'}`}>{content}</p>
       </div>
+      {dueDate && <p class="text-sm w-10 text-white opacity-70">{dueDate.toFormat('dd-MM')}</p>}
       <button
         onClick={() => deleteTodo(id, () => disappear(ref))}
         class="transition-colors ml-auto text-black/10 mr-2 hover:text-red-600"

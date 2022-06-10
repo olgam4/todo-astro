@@ -1,5 +1,3 @@
 import { DateTime } from 'luxon'
 
-export {
-  DateTime,
-}
+export const Date = DateTime
