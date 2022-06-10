@@ -1,28 +1,14 @@
 import { LogoutIcon } from '@components/Icons'
 import Cookies from 'js-cookie'
-import { createEffect, createSignal } from 'solid-js'
+import Link from './Link'
 
 export default function() {
-  const [location, setLocation] = createSignal('')
-
-  createEffect(() => {
-    setLocation(window.location.pathname)
-  })
-
   return (
     <ul
       class="flex pl-4 py-4"
     >
-      <li
-        class={`mr-4 ${location() === '/' ? 'text-blue-500' : 'text-gray-500'}`}
-      >
-        <a href="/">Todos</a>
-      </li>
-      <li
-        class={`mr-4 ${location() === '/category' ? 'text-blue-500' : 'text-gray-500'}`}
-      >
-        <a href="/category">Tags</a>
-      </li>
+      <Link to="/" name="Todos"/>
+      <Link to="/category" name="Tags"/>
       <li
         class="ml-auto pr-4"
       >

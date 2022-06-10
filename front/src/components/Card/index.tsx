@@ -1,7 +1,7 @@
 import { DeleteIcon } from "@components/Icons"
 import { onMount } from "solid-js"
 import { deleteTodo } from "./api"
-import { disappear, ise, onChange } from "./reactivity"
+import { disappear, onChange, registerAnimation } from "./reactivity"
 
 interface CardProps {
   status: boolean
@@ -16,20 +16,15 @@ export default function Card({
   id,
   color,
 }: CardProps) {
-  const state = ise()
-
   let ref: any
   let buttonRef: any
+
   const lid = `d-${id}`
 
-  !state[lid] && onMount(() => {
-    ref.classList.add('appear')
-    state.add(lid, true)
-  })
+  onMount(() => registerAnimation(lid, ref))
 
   return (
     <div
-      id={`d-${id}`}
       ref={ref}
       class="transition-all min-h-[50px] m-3 flex items-center bg-blue-100 shadow-md rounded-md"
       style={{ background: color }}
@@ -40,7 +35,7 @@ export default function Card({
             class="todo-checkbox"
             type="checkbox"
             checked={status}
-            onChange={() => onChange(buttonRef ,id, status)}
+            onChange={() => onChange(buttonRef, id, status)}
             />
         </div>
         <p class={`overflow-hidden flex items-center overflow-ellipsis w-full py-1 ${status && 'line-through'}`}>{content}</p>

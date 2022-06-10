@@ -8,6 +8,14 @@ export const ise = create<any>((set: any) => ({
   })
 }))
 
+export const registerAnimation = (lid: string, ref: any) => {
+  const state = ise()
+  if (!state[lid]) {
+    ref.classList.add('appear')
+    state.add(lid, true)
+  }
+}
+
 export const disappear = (ref) => {
   ref.classList.add('disappear')
   return new Promise<void>(resolve => setTimeout(() => {
