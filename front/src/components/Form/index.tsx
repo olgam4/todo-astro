@@ -1,7 +1,7 @@
 import { AddIcon } from '@components/Icons';
-import { setCaretAtTheEndOFTheDocument } from '@lib/document';
 import { createSignal } from 'solid-js';
 import { fn } from './api';
+import { styleKeywords } from './reactivity';
 
 const submit = (ref, accessor) => {
   const callback = accessor() || (() => {});
@@ -33,21 +33,9 @@ export default function () {
           name="content"
           id="content"
           contenteditable="true"
-          onKeyPress={(evt) => {
-            if (evt.key === 'Enter') {
-              evt.preventDefault();
-              buttonRef.click();
-            }
-            const text = ref.innerText;
-            const regex = /#[^\s]+/gim;
-            const newText = text.replace(regex, (match: string) => {
-              return `<span class="font-semibold text-blue-300">${match}</span>`
-            })
-            ref.innerHTML = newText;
-            setCaretAtTheEndOFTheDocument(ref);
-          }}
-          onInput={(evt) => {
-            setValue(evt.target.innerText)
+          onKeyPress={(evt: KeyboardEvent) => styleKeywords(evt, ref, buttonRef)}
+          onInput={(evt: InputEvent) => {
+            setValue((evt.target as HTMLInputElement).innerText)
           }}
           />
         <button

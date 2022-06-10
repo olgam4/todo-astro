@@ -16,6 +16,7 @@ model Todo {
   status           Boolean            @default(false)
   content          String             @db.VarChar(255)
   categories       CategoriesOnTodo[]
+  dueDate          DateTime           @db.DateTime
 }
 
 model User {

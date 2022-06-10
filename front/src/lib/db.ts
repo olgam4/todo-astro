@@ -1,4 +1,5 @@
 import { PrismaClient } from '@prisma/client';
+import { DateTime } from 'luxon';
 
 const prisma = new PrismaClient();
 
@@ -58,7 +59,7 @@ const deleteTodo = async (id: number) => {
   })
 }
 
-const saveTodo = async (content: any, categories: string[]) => {
+const saveTodo = async (content: any, categories: string[], date: DateTime) => {
   const categoryIds = await Promise.all(categories.map(async (category: string) => {
     const categoryData = await prisma.category.findMany({
       where: {
@@ -80,6 +81,7 @@ const saveTodo = async (content: any, categories: string[]) => {
   const todo = await prisma.todo.create({
     data: {
       content,
+      dueDate: date.toJSDate(),
       categories: {
         create: categoryIds.map(category => {
           return {
