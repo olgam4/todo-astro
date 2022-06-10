@@ -23,7 +23,7 @@ export const fn = async (form: any) => {
     }),
   })
   if (!response.ok) {
-    notify('There seems to have been a mistake...')
+    notify('Woops, something is wrong')
   }
   resetInput(form)
   await update()
@@ -54,10 +54,10 @@ const getHashtags = (content: string) => {
 }
 
 const getAts = (content: string) => {
-  const ats: string[] = content.match(/@\w+/g) || []
+  const ats: string[] = content.match(/@(\[.*\]|\w+)/g) || []
 
-  const atsList = ats.map(at => at.slice(1))
-  const contentWithoutAts = content.replace(/@\w+/g, '')
+  const atsList = ats.map(at => at.replace(/@/, '').replace(/[\[\]]/g, ''))
+  const contentWithoutAts = content.replace(/@(\[.*\]|\w+)/g, '')
 
   return { contentWithoutAts, atsList }
 }

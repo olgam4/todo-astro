@@ -29,7 +29,7 @@ const replaceHashtags = (text: string) => {
 }
 
 const replaceAt = (text: string) => {
-  const regex = /@[^\s]+/gim;
+  const regex = /@(\[.*\]|\w+)/gim;
   return text.replace(regex, (match: string) => {
     return `<span class="font-semibold text-fuchsia-700 ml-1">${match}</span>`
   })

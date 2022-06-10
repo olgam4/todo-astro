@@ -81,7 +81,7 @@ const saveTodo = async (content: any, categories: string[], date: DateTime) => {
   const todo = await prisma.todo.create({
     data: {
       content,
-      dueDate: date.toJSDate(),
+      dueDate: date && date.toJSDate(),
       categories: {
         create: categoryIds.map(category => {
           return {

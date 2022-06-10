@@ -15,7 +15,7 @@ export async function get() {
 export async function post({ request }) {
   const { content, ats, hashtags } = await request.json()
 
-  const datetime = mapStringToDatetime(ats)
+  const datetime = ats.map(mapStringToDatetime)[0]
   if (datetime === 'oops') return new Response('There was an error', { status: 400 })
 
   await DBClient.saveTodo(content, hashtags, datetime)

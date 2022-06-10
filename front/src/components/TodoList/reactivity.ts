@@ -16,11 +16,19 @@ const useTodos = () => {
       method: 'GET',
     })
     const data = await response.json()
-    console.log(data)
-    return data.map(todo => ({
+    const todos = data.map(todo => ({
       ...todo,
-      dueDate: DateTime.fromISO(todo.dueDate),
+      dueDate: todo.dueDate && DateTime.fromISO(todo.dueDate),
     }))
+    return todos.sort((a, b) => {
+      if (!a.dueDate) {
+        return -1
+      } else if (!b.dueDate) {
+        return 1
+      }
+
+      return a.dueDate.toMillis() - b.dueDate.toMillis()
+    })
   })
   subscribe(refetch)
 

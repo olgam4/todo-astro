@@ -1,7 +1,8 @@
-import { DeleteIcon } from "@components/Icons"
+import { Category } from "@components/CategoryList/reactivity"
+import { CalendarIcon, DeleteIcon } from "@components/Icons"
 import { registerAnimation } from "@lib/animation"
 import { DateTime } from "luxon"
-import { onMount } from "solid-js"
+import { For, onMount } from "solid-js"
 import { deleteTodo } from "./api"
 import { disappear, onChange } from "./reactivity"
 
@@ -9,8 +10,7 @@ interface CardProps {
   status: boolean
   content: string
   id: number
-  category: string
-  color?: string
+  categories: Category[]
   dueDate?: DateTime
 }
 
@@ -18,8 +18,7 @@ export default function Card({
   status,
   content,
   id,
-  color,
-  category,
+  categories,
   dueDate,
 }: CardProps) {
   let ref: any
@@ -28,13 +27,19 @@ export default function Card({
   const lid = `d-${id}`
 
   onMount(() => registerAnimation(lid, ref, 'appear'))
-  console.log(dueDate)
 
+  const style = categories.length === 0 ? { "background": '#aaf'}
+    :
+    categories.length > 1 ? {
+      "background-image" : `linear-gradient(to left, ${categories.map(c => c.color).join(', ')})`
+    } : {
+        "background" : `${categories[0].color}`
+      }
   return (
     <div
       ref={ref}
-      class="transition-all min-h-[50px] m-3 flex items-center bg-blue-100 shadow-md rounded-md"
-      style={{ background: color }}
+      class="transition-all min-h-[50px] m-3 flex items-center shadow-md rounded-md"
+      style={style}
     >
       <div class="w-[93%] h-full flex">
         <div ref={buttonRef} class="w-[60px] h-full rounded-l-md rounded-r-3xl mr-3">
@@ -45,14 +50,28 @@ export default function Card({
             onChange={() => onChange(buttonRef, id, status)}
             />
         </div>
-        {category && <p
-          class="flex items-center mr-2 opacity-70 font-semibold text-sm text-white"
+        <div
+          class="flex flex-col flex-wrap gap-2 mr-3 py-2"
         >
-          {category}
-        </p>}
+          <For each={categories} children={(category) => (
+            <p
+              class={`flex justify-center items-center opacity-70 p-1 rounded-md font-semibold text-sm text-white border border-gray-400`} 
+              style={{ background: category.color }}
+            >
+              {category.title}
+            </p>
+          )} />
+        </div>
         <p class={`overflow-hidden flex items-center overflow-ellipsis w-full py-1 ${status && 'line-through'}`}>{content}</p>
       </div>
-      {dueDate && <p class="text-sm w-10 text-white opacity-70">{dueDate.toFormat('dd-MM')}</p>}
+      {dueDate && (
+        <span
+          class="flex w-[80px] items-center gap-2 opacity-70 text-white"
+        >
+          <CalendarIcon />
+          <p class="text-sm">{dueDate.toFormat('dd-MM')}</p>
+        </span>
+      )}
       <button
         onClick={() => deleteTodo(id, () => disappear(ref))}
         class="transition-colors ml-auto text-black/10 mr-2 hover:text-red-600"
