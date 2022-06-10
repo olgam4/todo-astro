@@ -10,13 +10,24 @@ interface Props {
 }
 
 export default function Pill({ category, newCategoryState }: Props) {
+  let ref: any
   return (
     <li
-      class="flex p-2 rounded-md items-center space-x-2"
-      style={{ background: category.checked ? `${category.color} !important` : '#eee' }}
+      class="flex p-2 rounded-md items-center select-none cursor-pointer hover:opacity-80"
+      style={{ background: category.checked ? `${category.color}` : '#eee' }}
+      onClick={() => ref.click()}
     >
-      <input id={category.id} type="checkbox" checked={category.checked} onChange={newCategoryState} />
-      <p>{category.title}</p>
+      <input
+        ref={ref}
+        id={category.id}
+        type="checkbox"
+        checked={category.checked}
+        onChange={newCategoryState}
+        class="cursor-pointer display-none"
+        />
+      <p
+        class="text-sm text-gray-600 font-medium leading-6"
+      >{category.title}</p>
     </li>
   )
 }

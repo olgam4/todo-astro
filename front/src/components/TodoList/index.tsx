@@ -31,7 +31,8 @@ export default function () {
               status={t.status}
               id={t.id}
               content={t.content}
-              color={t.categories[0] ? t.categories[0].color : '#fff'}
+              color={t.categories[0] ? t.categories[0].color : '#aaf'}
+              category={t.categories[0]?.title}
               />
           )}
           fallback={<NoTodos message={why}/>}

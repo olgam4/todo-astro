@@ -1,9 +1,8 @@
+import { resetAnimation } from "@lib/animation"
 import { update } from "@lib/update"
-import { ise } from "./reactivity"
 
 export const markTodo = async (id: number, value: boolean) => {
-  const state = ise()
-  state.add(id, false)
+  resetAnimation(id.toString())
   await fetch('/api/todo-mark', {
     method: 'POST',
     headers: {

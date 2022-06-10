@@ -1,13 +1,15 @@
 import { DeleteIcon } from "@components/Icons"
+import { registerAnimation } from "@lib/animation"
 import { onMount } from "solid-js"
 import { deleteTodo } from "./api"
-import { disappear, onChange, registerAnimation } from "./reactivity"
+import { disappear, onChange } from "./reactivity"
 
 interface CardProps {
   status: boolean
   content: string
   id: number
-  color: string
+  category: string
+  color?: string
 }
 
 export default function Card({
@@ -15,13 +17,14 @@ export default function Card({
   content,
   id,
   color,
+  category,
 }: CardProps) {
   let ref: any
   let buttonRef: any
 
   const lid = `d-${id}`
 
-  onMount(() => registerAnimation(lid, ref))
+  onMount(() => registerAnimation(lid, ref, 'appear'))
 
   return (
     <div
@@ -38,6 +41,11 @@ export default function Card({
             onChange={() => onChange(buttonRef, id, status)}
             />
         </div>
+        {category && <p
+          class="flex items-center mr-2 opacity-70 font-semibold text-sm text-white"
+        >
+          {category}
+        </p>}
         <p class={`overflow-hidden flex items-center overflow-ellipsis w-full py-1 ${status && 'line-through'}`}>{content}</p>
       </div>
       <button

@@ -1,5 +1,6 @@
 import { ArrowLeftIcon, ArrowRightIcon, SearchIcon } from "@components/Icons"
-import { For, Show } from "solid-js"
+import { registerAnimation, resetAnimationType } from "@lib/animation"
+import { For, onMount, Show } from "solid-js"
 import Button from "./Button"
 import Pill from "./Pill"
 import { useSearch } from './reactivity'
@@ -33,16 +34,24 @@ export default function Search({
           <>
             <For
               each={categoriesState()}
-              children={(category) => (
-                <li>
-                  <Pill category={category} newCategoryState={newCategoryState} />
-                </li>
-              )} />
-            <Button icon={<ArrowLeftIcon/ >} action={() => setShowCategories(false)}/>
+              children={(category) => {
+                let ref: any
+                const id = `search-category-${category.id}`
+                onMount(() => registerAnimation(id, ref, 'fade-in'))
+                return (
+                  <li ref={ref}>
+                    <Pill category={category} newCategoryState={newCategoryState} />
+                  </li>
+                )}}
+              />
+            <Button icon={<ArrowLeftIcon />} action={() => {
+              setShowCategories(false)
+              resetAnimationType('fade-in')
+            }}/>
             </>
         )}
         fallback={(
-          <Button icon={<ArrowRightIcon/ >} action={() => setShowCategories(true)}/>
+          <Button icon={<ArrowRightIcon />} action={() => setShowCategories(true)}/>
         )}
         />
     </ul>

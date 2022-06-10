@@ -1,20 +1,4 @@
-import create from 'solid-zustand'
 import { markTodo } from "./api"
-
-export const ise = create<any>((set: any) => ({
-  add: (id: string, el: boolean) => set((state: any) => {
-    state[id] = el
-    return state
-  })
-}))
-
-export const registerAnimation = (lid: string, ref: any) => {
-  const state = ise()
-  if (!state[lid]) {
-    ref.classList.add('appear')
-    state.add(lid, true)
-  }
-}
 
 export const disappear = (ref) => {
   ref.classList.add('disappear')
