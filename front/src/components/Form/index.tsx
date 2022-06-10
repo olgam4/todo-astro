@@ -11,8 +11,9 @@ const submit = (ref, accessor) => {
 }
 
 export default function () {
-  let ref
-  let bref
+  let ref: any
+  let buttonRef: any
+
   return (
     <form
       use:submit={fn}
@@ -23,10 +24,9 @@ export default function () {
       >
         <div
           ref={ref}
-          class="border rounded-sm p-1"
+          class="border rounded-sm p-1 bg-white"
           name="content"
           id="content"
-          placeholder="TODO"
           contenteditable="true"
           onKeyPress={(evt) => {
             const text = ref.innerText;
@@ -38,13 +38,12 @@ export default function () {
             setCaretAtTheEndOFTheDocument(ref);
             if (evt.key === 'Enter') {
               evt.preventDefault();
-              bref.click();
+              buttonRef.click();
             }
           }}
-
           />
         <button
-          ref={bref}
+          ref={buttonRef}
           type="submit"
           class="shadow-xl shadow-black-900 absolute right-3 top-4 h-10 w-10 transition-all rounded-full flex justify-center items-center bg-blue-300 hover:bg-blue-700 hover:text-white"
         >
